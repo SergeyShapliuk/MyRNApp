@@ -1,4 +1,4 @@
-package com.myrnapp.newarchitecture;
+package marafon.bet.bk.stavki.sport.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.myrnapp.BuildConfig;
-import com.myrnapp.newarchitecture.components.MainComponentsRegistry;
-import com.myrnapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import marafon.bet.bk.stavki.sport.BuildConfig;
+import marafon.bet.bk.stavki.sport.newarchitecture.components.MainComponentsRegistry;
+import marafon.bet.bk.stavki.sport.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

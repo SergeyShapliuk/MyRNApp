@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "661235296676",
+    "project_id": "giko-8ae5c",
+    "storage_bucket": "giko-8ae5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661235296676:android:cb7e9fa6f2ec8be540f931",
+        "android_client_info": {
+          "package_name": "marafon.bet.bk.stavki.sport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661235296676-mg887euh3f0gfu6vm9m99sqdn1reh8g0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf2A3l8bxcZY6rDIllEmSTf9QSyWhtYq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661235296676-mg887euh3f0gfu6vm9m99sqdn1reh8g0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

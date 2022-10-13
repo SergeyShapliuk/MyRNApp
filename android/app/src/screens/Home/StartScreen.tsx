@@ -2,27 +2,25 @@ import {useEffect} from 'react';
 import {useAppNavigation} from '../../types/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeviceInfo from 'react-native-device-info';
+import {fetchUrl} from '../../api/api';
 
 const StartScreen = () => {
   const navigation = useAppNavigation();
 
   useEffect(() => {
-    // remoteConfig()
-    //   .setDefaults({
-    //     url: '',
-    //   })
-    //   .then(() => remoteConfig().fetchAndActivate());
-    // remoteConfig().setConfigSettings({
-    //   minimumFetchIntervalMillis: 30000,
-    // });
-    getLocalStorage().then(() => start(''));
+    fetchUrl().then(response =>
+      getLocalStorage().then(() => {
+        start('', response);
+      }),
+    );
   });
 
-  const start = (value: string | null | undefined) => {
-    if (!value) {
-      loadFire();
+  const start = (localValue: string | null | undefined, url: string) => {
+    console.log('local', localValue);
+    if (!localValue) {
+      loadFire(url);
     } else {
-      return navigation.navigate('WebView', {url: value});
+      return navigation.navigate('WebView', {url: localValue});
     }
   };
   const localStorage = async (value: string) => {
@@ -32,22 +30,20 @@ const StartScreen = () => {
     const jsonValue = await AsyncStorage.getItem('url');
     return jsonValue !== null ? jsonValue : null;
   };
-  const loadFire = () => {
-    const getUrl = '';
+  const loadFire = (url: string | null) => {
+    const getUrl = url;
+    console.log('url', url);
     const brandDevice = DeviceInfo.getBrand();
     const simDevice = DeviceInfo.getCarrierSync();
-    console.log('getUrl', getUrl);
-    console.log('brandDevice', brandDevice);
-    console.log('simDevice', simDevice);
-    if (getUrl === '' || brandDevice === 'google' || !simDevice) {
-      console.log('home');
+    if (!getUrl || brandDevice === 'google' || !simDevice) {
+      console.log('empty');
       navigation.navigate('Home');
     } else {
+      console.log('webview');
       localStorage(getUrl);
       navigation.navigate('WebView', {url: getUrl});
     }
   };
-
   return null;
 };
 

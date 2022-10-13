@@ -13,12 +13,8 @@ const Main = () => {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Start"
-            options={{headerShown: false}}
-            component={StartScreen}
-          />
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen
             name="Home"
             options={{headerBackVisible: false}}

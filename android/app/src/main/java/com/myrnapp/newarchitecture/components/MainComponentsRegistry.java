@@ -1,4 +1,4 @@
-package com.myrnapp.newarchitecture.components;
+package marafon.bet.bk.stavki.sport.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

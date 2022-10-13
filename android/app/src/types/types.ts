@@ -17,3 +17,9 @@ export type WebViewProps = NativeStackScreenProps<
 >;
 
 export const useAppNavigation = () => useNavigation<UseNavigationType>();
+
+export type DataType = {
+  question: string;
+  options: string[];
+  correct_option: string;
+};

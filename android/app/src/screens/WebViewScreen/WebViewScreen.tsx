@@ -11,6 +11,7 @@ const WebViewScreen = ({route}: WebViewProps) => {
     //   () => true,
     // );
   });
+  console.log('webview');
   return (
     <View style={styles.container}>
       <WebView source={{uri: route.params.url}} />
