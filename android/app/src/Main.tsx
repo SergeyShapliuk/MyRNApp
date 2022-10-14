@@ -15,16 +15,8 @@ const Main = () => {
       <View style={styles.container}>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Start" component={StartScreen} />
-          <Stack.Screen
-            name="Home"
-            options={{headerBackVisible: false}}
-            component={HomeScreen}
-          />
-          <Stack.Screen
-            name="WebView"
-            options={{headerBackVisible: false}}
-            component={WebViewScreen}
-          />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="WebView" component={WebViewScreen} />
         </Stack.Navigator>
       </View>
     </NavigationContainer>

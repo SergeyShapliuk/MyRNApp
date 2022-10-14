@@ -9,7 +9,7 @@ const HomeScreen = () => {
   useEffect(() => {
     navigation.addListener('beforeRemove', e => e.preventDefault());
   }, [navigation]);
-  console.log('home', data);
+  console.log('home');
   const allQuestions = data;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState<

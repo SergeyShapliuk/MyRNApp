@@ -1,20 +1,50 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, { useEffect, useRef, useState } from "react";
+import {ActivityIndicator, BackHandler, StyleSheet, View} from 'react-native';
 import WebView from 'react-native-webview';
 import {GAP, PADDING, WIDTH} from '../../constants/constants';
 import {WebViewProps} from '../../types/types';
 
 const WebViewScreen = ({route}: WebViewProps) => {
+  // const navigation = useAppNavigation();
+  const [canGoBack, setCanGoBack] = useState(false);
+  const [canGoForward, setCanGoForward] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState('');
+  const webviewRef = useRef(null);
+  console.log('web', canGoBack);
+  console.log('web', canGoForward);
+  console.log('web', currentUrl);
+  console.log('web', route.name);
   useEffect(() => {
-    // const backHandler = BackHandler.addEventListener(
-    //   'hardwareBackPress',
-    //   () => true,
-    // );
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      console.log('web', canGoBack);
+      console.log('web', canGoForward);
+      console.log('web', currentUrl);
+      if (currentUrl !== route.params.url) {
+        return canGoForward;
+      } else {
+        return canGoBack;
+      }
+    });
+  }, [canGoBack, canGoForward, currentUrl]);
+  BackHandler.addEventListener('hardwareBackPress', () => {
+    return route.params.url === currentUrl ? true : false;
   });
-  console.log('webview');
+
   return (
     <View style={styles.container}>
-      <WebView source={{uri: route.params.url}} />
+      <WebView
+        source={{uri: route.params.url}}
+        startInLoadingState={true}
+        renderLoading={() => (
+          <ActivityIndicator color={'black'} size={'large'} />
+        )}
+        ref={webviewRef}
+        onNavigationStateChange={navState => {
+          setCanGoBack(navState.canGoBack);
+          setCanGoForward(navState.canGoForward);
+          setCurrentUrl(navState.url);
+        }}
+      />
     </View>
   );
 };

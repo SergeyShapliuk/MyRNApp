@@ -1,8 +1,9 @@
 import {useEffect} from 'react';
 import {useAppNavigation} from '../../types/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import DeviceInfo from 'react-native-device-info';
 import {fetchUrl} from '../../api/api';
+import DeviceInfo from 'react-native-device-info';
+import OneSignal from 'react-native-onesignal';
 
 const StartScreen = () => {
   const navigation = useAppNavigation();
@@ -13,7 +14,10 @@ const StartScreen = () => {
         start('', response);
       }),
     );
-  });
+    OneSignal.setLogLevel(6, 0);
+    OneSignal.setAppId('f3fea758-bcfc-4fc8-b971-c5a16cb69d9f');
+    OneSignal.setNotificationOpenedHandler;
+  }, []);
 
   const start = (localValue: string | null | undefined, url: string) => {
     console.log('local', localValue);
@@ -30,18 +34,22 @@ const StartScreen = () => {
     const jsonValue = await AsyncStorage.getItem('url');
     return jsonValue !== null ? jsonValue : null;
   };
-  const loadFire = (url: string | null) => {
-    const getUrl = url;
-    console.log('url', url);
+  const loadFire = async (url: string | null) => {
+    url = 'https://yandex.by/';
     const brandDevice = DeviceInfo.getBrand();
     const simDevice = DeviceInfo.getCarrierSync();
-    if (!getUrl || brandDevice === 'google' || !simDevice) {
+    const emulator = await DeviceInfo.isEmulator();
+    console.log('url', url);
+    console.log('brandDevice', brandDevice);
+    console.log('simDevice', simDevice);
+    console.log('emulator', emulator);
+    if (!url || brandDevice === 'google' || !simDevice || emulator) {
       console.log('empty');
       navigation.navigate('Home');
     } else {
       console.log('webview');
-      localStorage(getUrl);
-      navigation.navigate('WebView', {url: getUrl});
+      await localStorage(url);
+      navigation.navigate('WebView', {url: url});
     }
   };
   return null;
