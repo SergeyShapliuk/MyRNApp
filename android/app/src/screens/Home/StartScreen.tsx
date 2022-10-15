@@ -10,13 +10,10 @@ const StartScreen = () => {
 
   useEffect(() => {
     fetchUrl().then(response =>
-      getLocalStorage().then(() => {
-        start('', response);
+      getLocalStorage().then(localStorage => {
+        start(localStorage, response);
       }),
     );
-    OneSignal.setLogLevel(6, 0);
-    OneSignal.setAppId('f3fea758-bcfc-4fc8-b971-c5a16cb69d9f');
-    OneSignal.setNotificationOpenedHandler;
   }, []);
 
   const start = (localValue: string | null | undefined, url: string) => {
@@ -35,7 +32,9 @@ const StartScreen = () => {
     return jsonValue !== null ? jsonValue : null;
   };
   const loadFire = async (url: string | null) => {
-    url = 'https://yandex.by/';
+    await OneSignal.setLogLevel(6, 0);
+    await OneSignal.setAppId('f3fea758-bcfc-4fc8-b971-c5a16cb69d9f');
+    await OneSignal.setNotificationOpenedHandler;
     const brandDevice = DeviceInfo.getBrand();
     const simDevice = DeviceInfo.getCarrierSync();
     const emulator = await DeviceInfo.isEmulator();
@@ -55,14 +54,4 @@ const StartScreen = () => {
   return null;
 };
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   scrollView: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 export default StartScreen;
